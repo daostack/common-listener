@@ -1,0 +1,22 @@
+{
+  "name": "common-listener",
+  "version": "0.1.0",
+  "description": "Listener for DAO events",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/daostack/common-listener.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/daostack/common-listener/issues"
+  },
+  "homepage": "https://github.com/daostack/common-listener#readme",
+  "dependencies": {
+    "@daostack/arc.js": "^2.0.0-experimental.7"
+  }
+}
