@@ -12,9 +12,15 @@ yarn start
 
 # Deployment
 
+
+For ease of use, there is a `./deploy.sh` script that will run the following steps.
+
+
 You need the `.pem` file. Once you have it, login with:
 
-```ssh -i ~/.ssh/common-listener.pem ubuntu@ec2-3-23-162-232.us-east-2.compute.amazonaws.com```
+```
+ssh -i ~/.ssh/common-listener.pem ubuntu@ec2-3-23-162-232.us-east-2.compute.amazonaws.com
+```
 
 And do the following:
 
