@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "forever": "forever stop common-listener && forever start forever.conf.json && forever list",
+    "forever": "forever stop common-listener || true && forever start forever.conf.json && forever list",
     "forever-list": "forever list",
     "forever-cmd": "forever", 
     "test": "echo \"Error: no test specified\" && exit 1"
