@@ -1,0 +1,10 @@
+{
+    "uid": "common-listener",
+    "append": true,
+    "watch": true,
+    "sourceDir": "./",
+    "logFile": "./common-listener.log",
+    "outFile": "./out.log",
+    "errFile": "./error.log",
+    "script": "index.js"
+}
