@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@daostack/arc.js@^2.0.0-experimental.7":
-  version "2.0.0-experimental.7"
-  resolved "https://registry.yarnpkg.com/@daostack/arc.js/-/arc.js-2.0.0-experimental.7.tgz#ced2bffe6c18d8fd248f1013b173ce6cdfaacd2e"
-  integrity sha512-7XKuMuIFWJlu5ggmt2lPrUjwGedxvzF74Up4VLxyHFz2NUSPG7nCco5SApF70AT3qMlsBNF1QJyyD7E2mq7V6w==
+"@daostack/arc.js@^2.0.0-experimental.33":
+  version "2.0.0-experimental.33"
+  resolved "https://registry.yarnpkg.com/@daostack/arc.js/-/arc.js-2.0.0-experimental.33.tgz#e6f6fc75b5c294fd28eb4c6f804c6766873d2166"
+  integrity sha512-neaS6CAXSv/ST351EDOfKo0fMbwoIvTIQumvXMrc32LA6U5I51VByqAKhnPZar9TJxoZr14BMle2XeV1NPbdag==
   dependencies:
     apollo-cache-inmemory "^1.6.5"
     apollo-client "^2.6.8"

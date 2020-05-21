@@ -1,10 +1,8 @@
 const { Arc } = require('@daostack/arc.js');
 const fetch = require('node-fetch');
 
-const graphHttpLink =
-  'https://api.thegraph.com/subgraphs/name/daostack/v7_5_exp_rinkeby';
-const graphwsLink =
-  'wss://api.thegraph.com/subgraphs/name/daostack/v7_5_exp_rinkeby';
+const graphHttpLink = 'https://api.thegraph.com/subgraphs/name/daostack/v8_1_exp_xdai'
+const graphwsLink = 'wss://api.thegraph.com/subgraphs/name/daostack/v8_1_exp_xdai'
 
 const arc = new Arc({
   graphqlHttpProvider: graphHttpLink,
@@ -15,8 +13,8 @@ function startDAOSubscription() {
   arc
     .daos({}, {subscribe: true, fetchAllData: true})
     .subscribe(async () => {
-        // const request = await fetch('http://localhost:5001/common-daostack/us-central1/api/update-daos');
-        const url = 'https://us-central1-common-daostack.cloudfunctions.net/api/update-daos'
+      const url = 'http://localhost:5001/common-daostack/us-central1/api/update-daos';
+        // const url = 'https://us-central1-common-daostack.cloudfunctions.net/api/update-daos'
         const request = await fetch(url)
         if (request.status !== 200) {
           throw Error(`Error fetching ${url}: ${request.status} ${request.statusText}`)
@@ -72,7 +70,9 @@ arc.proposals({}, {subscribe: true, fetchAllData: true})
       console.log('PROPOSAL _> : : : ', proposal);
       console.log('PROPOSAL OBJECT _> : : : ', proposalObject);
     })
-    const url = 'https://us-central1-common-daostack.cloudfunctions.net/api/update-proposals';
+    const url = 'http://localhost:5001/common-daostack/us-central1/api/update-proposals';
+
+    // const url = 'https://us-central1-common-daostack.cloudfunctions.net/api/update-proposals';
     const request = await fetch(url);
     if (request.status !== 200) {
       throw Error(`Error fetching ${url}: ${request.status} ${request.statusText}`)
@@ -82,7 +82,8 @@ arc.proposals({}, {subscribe: true, fetchAllData: true})
 
 arc.plugins({}, {subscribe: true, fetchAllData: true})
   .subscribe(async plugins => {
-    const url = 'https://us-central1-common-daostack.cloudfunctions.net/api/update-plugins';
+    const url = 'http://localhost:5001/common-daostack/us-central1/api/update-plugins';
+    // const url = 'https://us-central1-common-daostack.cloudfunctions.net/api/update-plugins';
     const request = await fetch(url);
     if (request.status !== 200) {
       throw Error(`Error fetching ${url}: ${request.status} ${request.statusText}`)

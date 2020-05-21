@@ -7,7 +7,7 @@
     "start": "node index.js",
     "forever": "forever stop common-listener || true && forever start forever.conf.json && forever list",
     "forever-list": "forever list",
-    "forever-cmd": "forever", 
+    "forever-cmd": "forever",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -21,7 +21,7 @@
   },
   "homepage": "https://github.com/daostack/common-listener#readme",
   "dependencies": {
-    "@daostack/arc.js": "^2.0.0-experimental.7",
+    "@daostack/arc.js": "^2.0.0-experimental.33",
     "forever": "^2.0.0"
   }
 }
