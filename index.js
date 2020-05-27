@@ -1,8 +1,9 @@
 const { Arc } = require('@daostack/arc.js');
 const fetch = require('node-fetch');
 
-const graphHttpLink = 'https://api.thegraph.com/subgraphs/name/daostack/v8_1_exp_xdai'
-const graphwsLink = 'wss://api.thegraph.com/subgraphs/name/daostack/v8_1_exp_xdai'
+const graphHttpLink = 'https://api.thegraph.com/subgraphs/name/daostack/v8_1_exp_xdai';
+const graphwsLink = 'wss://api.thegraph.com/subgraphs/name/daostack/v8_1_exp_xdai';
+const CLOUDFUNCTIONS_URL = `https://us-central1-common-daostack.cloudfunctions.net/api/`;
 
 const arc = new Arc({
   graphqlHttpProvider: graphHttpLink,
@@ -13,17 +14,16 @@ function startDAOSubscription() {
   arc
     .daos({}, {subscribe: true, fetchAllData: true})
     .subscribe(async () => {
-      const url = 'http://localhost:5001/common-daostack/us-central1/api/update-daos';
-        // const url = 'https://us-central1-common-daostack.cloudfunctions.net/api/update-daos'
-        const request = await fetch(url)
-        if (request.status !== 200) {
-          throw Error(`Error fetching ${url}: ${request.status} ${request.statusText}`)
-        }
-        console.log('Updated DAOs: ', request.status, request.statusText);
+      const url = `${CLOUDFUNCTIONS_URL}update-daos`;
+      const request = await fetch(url);
+      if (request.status !== 200) {
+        throw Error(`Error fetching ${url}: ${request.status} ${request.statusText}`);
+      }
+      console.log('Updated DAOs: ', request.status, request.statusText);
     });
 }
 
-startDAOSubscription()
+startDAOSubscription();
 
 arc.proposals({}, {subscribe: true, fetchAllData: true})
   .subscribe(async proposals => {
@@ -66,28 +66,26 @@ arc.proposals({}, {subscribe: true, fetchAllData: true})
         images: [
         ],
         winningOutcome: coreState.winningOutcome,
-      }
+      };
       console.log('PROPOSAL _> : : : ', proposal);
       console.log('PROPOSAL OBJECT _> : : : ', proposalObject);
-    })
-    const url = 'http://localhost:5001/common-daostack/us-central1/api/update-proposals';
+    });
+    const url = `${CLOUDFUNCTIONS_URL}update-proposals`;
 
-    // const url = 'https://us-central1-common-daostack.cloudfunctions.net/api/update-proposals';
     const request = await fetch(url);
     if (request.status !== 200) {
-      throw Error(`Error fetching ${url}: ${request.status} ${request.statusText}`)
+      throw Error(`Error fetching ${url}: ${request.status} ${request.statusText}`);
     }
     console.log('Updated Proposals: ', request.status, request.statusText);
 });
 
-arc.plugins({}, {subscribe: true, fetchAllData: true})
-  .subscribe(async plugins => {
-    const url = 'http://localhost:5001/common-daostack/us-central1/api/update-plugins';
-    // const url = 'https://us-central1-common-daostack.cloudfunctions.net/api/update-plugins';
-    const request = await fetch(url);
-    if (request.status !== 200) {
-      throw Error(`Error fetching ${url}: ${request.status} ${request.statusText}`)
-    }
-});
+// arc.plugins({}, {subscribe: true, fetchAllData: true})
+//   .subscribe(async () => {
+//     const url = `${CLOUDFUNCTIONS_URL}update-plugins`;
+//     const request = await fetch(url);
+//     if (request.status !== 200) {
+//       throw Error(`Error fetching ${url}: ${request.status} ${request.statusText}`);
+//     }
+// });
 
 
