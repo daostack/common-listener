@@ -40,6 +40,8 @@ Also:
 yarn forever-cmd list # list the currently running processes
 ```
 
+# Troubleshooting and helper functions
 
+`yarn log` will show you server-side logs
 
-
+`yarn deploy` will deploy
