@@ -1,9 +1,7 @@
 const { Arc } = require('@daostack/arc.js');
 const fetch = require('node-fetch');
 
-const graphHttpLink = 'https://api.thegraph.com/subgraphs/name/daostack/v8_1_exp_xdai';
-const graphwsLink = 'wss://api.thegraph.com/subgraphs/name/daostack/v8_1_exp_xdai';
-const CLOUDFUNCTIONS_URL = `https://us-central1-common-daostack.cloudfunctions.net/api/`;
+const {graphHttpLink, graphwsLink, CLOUDFUNCTIONS_URL} = require("./settings");
 
 const arc = new Arc({
   graphqlHttpProvider: graphHttpLink,
