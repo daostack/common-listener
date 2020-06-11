@@ -1,6 +1,5 @@
 const { Arc, Vote } = require('@daostack/arc.js');
-
-import {graphHttpLink, graphwsLink, handleObjectSubscribe} from './Util'
+const {graphHttpLink, graphwsLink} = require("./settings");
 
 const arc = new Arc({
   graphqlHttpProvider: graphHttpLink,
@@ -15,14 +14,12 @@ function subscribeToCommons() {
     });
 }
 
-
 function subscribeToProposals() {
   arc.proposals({}, { subscribe: true, fetchAllData: true })
     .subscribe(async () => {
       handleObjectSubscribe('update-proposals');
     });
 }
-
 
 function subscribeToVotes() {
   const members = await Vote.search(arc, {}, { subscribe: true, fetchAllData: true });

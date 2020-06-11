@@ -1,8 +1,5 @@
 const fetch = require('node-fetch');
-
-export const graphHttpLink = 'https://api.thegraph.com/subgraphs/name/daostack/v8_1_exp_xdai';
-export const graphwsLink = 'wss://api.thegraph.com/subgraphs/name/daostack/v8_1_exp_xdai';
-export const CLOUDFUNCTIONS_URL = `https://us-central1-common-daostack.cloudfunctions.net/api/`;
+const { CLOUDFUNCTIONS_URL} = require("../settings");
 
 export const handleObjectSubscribe = (endPointName) => {
     try {
