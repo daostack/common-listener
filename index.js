@@ -1,9 +1,6 @@
-const { Arc } = require('@daostack/arc.js');
-const fetch = require('node-fetch');
+const { Arc, Vote } = require('@daostack/arc.js');
 
-const graphHttpLink = 'https://api.thegraph.com/subgraphs/name/daostack/v8_1_exp_xdai';
-const graphwsLink = 'wss://api.thegraph.com/subgraphs/name/daostack/v8_1_exp_xdai';
-const CLOUDFUNCTIONS_URL = `https://us-central1-common-daostack.cloudfunctions.net/api/`;
+import {graphHttpLink, graphwsLink, handleObjectSubscribe} from './Util'
 
 const arc = new Arc({
   graphqlHttpProvider: graphHttpLink,
@@ -14,12 +11,7 @@ function subscribeToCommons() {
   arc
     .daos({}, { subscribe: true, fetchAllData: true })
     .subscribe(async () => {
-      const url = `${CLOUDFUNCTIONS_URL}update-daos`;
-      const request = await fetch(url);
-      if (request.status !== 200) {
-        throw Error(`Error fetching ${url}: ${request.status} ${request.statusText}`);
-      }
-      console.log(Date(), 'Updated DAOs: ', request.status, request.statusText);
+      handleObjectSubscribe('update-daos');
     });
 }
 
@@ -27,22 +19,21 @@ function subscribeToCommons() {
 function subscribeToProposals() {
   arc.proposals({}, { subscribe: true, fetchAllData: true })
     .subscribe(async () => {
-      try {
-
-        const url = `${CLOUDFUNCTIONS_URL}update-proposals`;
-        const request = await fetch(url);
-        if (request.status !== 200) {
-          throw Error(`Error fetching ${url}: ${request.status} ${request.statusText}`);
-        }
-        console.log(Date(), 'Updated Proposals: ', request.status, request.statusText);
-      } catch (err) {
-        console.error(`${Date()} ${err}`);
-      }
+      handleObjectSubscribe('update-proposals');
     });
+}
+
+
+function subscribeToVotes() {
+  const members = await Vote.search(arc, {}, { subscribe: true, fetchAllData: true });
+  members.subscribe(async () => {
+    handleObjectSubscribe('update-votes');
+  });
 }
 
 subscribeToCommons();
 subscribeToProposals();
+subscribeToVotes();
 
 // arc.plugins({}, {subscribe: true, fetchAllData: true})
 //   .subscribe(async () => {
