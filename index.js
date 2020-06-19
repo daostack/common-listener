@@ -1,7 +1,5 @@
-const { Arc } = require('@daostack/arc.js');
-const fetch = require('node-fetch');
-
-const {graphHttpLink, graphwsLink, CLOUDFUNCTIONS_URL} = require("./settings");
+const { Arc, Vote } = require('@daostack/arc.js');
+const {graphHttpLink, graphwsLink} = require("./settings");
 
 const arc = new Arc({
   graphqlHttpProvider: graphHttpLink,
@@ -12,35 +10,27 @@ function subscribeToCommons() {
   arc
     .daos({}, { subscribe: true, fetchAllData: true })
     .subscribe(async () => {
-      const url = `${CLOUDFUNCTIONS_URL}update-daos`;
-      const request = await fetch(url);
-      if (request.status !== 200) {
-        throw Error(`Error fetching ${url}: ${request.status} ${request.statusText}`);
-      }
-      console.log(Date(), 'Updated DAOs: ', request.status, request.statusText);
+      handleObjectSubscribe('update-daos');
     });
 }
-
 
 function subscribeToProposals() {
   arc.proposals({}, { subscribe: true, fetchAllData: true })
     .subscribe(async () => {
-      try {
-
-        const url = `${CLOUDFUNCTIONS_URL}update-proposals`;
-        const request = await fetch(url);
-        if (request.status !== 200) {
-          throw Error(`Error fetching ${url}: ${request.status} ${request.statusText}`);
-        }
-        console.log(Date(), 'Updated Proposals: ', request.status, request.statusText);
-      } catch (err) {
-        console.error(`${Date()} ${err}`);
-      }
+      handleObjectSubscribe('update-proposals');
     });
+}
+
+function subscribeToVotes() {
+  const members = await Vote.search(arc, {}, { subscribe: true, fetchAllData: true });
+  members.subscribe(async () => {
+    handleObjectSubscribe('update-votes');
+  });
 }
 
 subscribeToCommons();
 subscribeToProposals();
+subscribeToVotes();
 
 // arc.plugins({}, {subscribe: true, fetchAllData: true})
 //   .subscribe(async () => {
