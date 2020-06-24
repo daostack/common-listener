@@ -8,14 +8,14 @@ productionENV="$CURRENTDIR/$DIRNAME/production/env.json"
 currentENV="$CURRENTDIR/$DIRNAME/env.json"
 
 if [[ $1 == "-stg" ]]; then
-  echo "Switching staging environment ..."
+  echo "Switching $(tput setaf 1) staging $(tput sgr0) environment ..."
   cp -f "$stagingENV" "$currentENV"
   echo "Configuration changed"
   exit
 fi
 
 if [[ $1 = "-prod" ]]; then
-  echo "Switching production environment ..."
+  echo "Switching $(tput setaf 1) production $(tput sgr0) environment ..."
   cp -f "$productionENV" "$currentENV"
   echo "Configuration changed"
   exit
@@ -26,9 +26,9 @@ stagingMD5=`md5sum $stagingENV | awk '{ print $1 }'`
 productionMD5=`md5sum $productionENV | awk '{ print $1 }'`
 
 if [ "$currentMD5" = "$stagingMD5" ]; then
-  echo "Current environment is staging"
+  echo "Current environment is $(tput setaf 1) Staging $(tput sgr0)"
 elif [ "$currentMD5" = "$productionMD5" ]; then
-  echo "Current environment is production"
+  echo "Current environment is $(tput setaf 1) Production $(tput sgr0)"
 else
    echo "Environment not match"
 fi
