@@ -9,10 +9,12 @@
     "forever-list": "forever list",
     "forever-cmd": "forever",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "deploy": "./deploy.sh",
+    "deploy": "./env/env.sh && ./deploy.sh",
     "status": "./status.sh",
     "log": "./log.sh",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "use-staging": "./env/env.sh -stg",
+    "use-production": "./env/env.sh -prod"
   },
   "repository": {
     "type": "git",
