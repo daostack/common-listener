@@ -14,7 +14,8 @@
     "log": "./log.sh",
     "lint": "eslint .",
     "use-staging": "./env/env.sh -stg",
-    "use-production": "./env/env.sh -prod"
+    "use-production": "./env/env.sh -prod",
+    "env": "./env/env.sh"
   },
   "repository": {
     "type": "git",
