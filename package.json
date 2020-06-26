@@ -9,13 +9,13 @@
     "forever-list": "forever list",
     "forever-cmd": "forever",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "deploy-production": "./env/env.sh && ./deploy.sh",
-    "deploy-staging": "./env/env.sh && ./deploy-staging.sh",
+    "deploy:production": "./env/env.sh -check && ./deploy.sh",
+    "deploy:staging": "./env/env.sh -check && ./deploy-stg.sh",
     "status": "./status.sh",
     "log": "./log.sh",
     "lint": "eslint .",
-    "use-staging": "./env/env.sh -stg",
-    "use-production": "./env/env.sh -prod",
+    "use:staging": "./env/env.sh -stg",
+    "use:production": "./env/env.sh -prod",
     "env": "./env/env.sh"
   },
   "repository": {
