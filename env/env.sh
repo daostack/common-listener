@@ -48,7 +48,7 @@ elif [ "$currentMD5" = "$productionMD5" ]; then
     fi
     echo "$(tput setaf 1)Enviroment mismatched$(tput sgr0)"
     echo "Current branch is $(tput setaf 1)$currentBranch$(tput sgr0), you need switch to $(tput setaf 1)Master $(tput sgr0)"
-    echo "Only$(tput setaf 1) Master $(tput sgr0)branch can depoly to $(tput setaf 1)Production Environment$(tput sgr0)\n"
+    echo "Only$(tput setaf 1) Master $(tput sgr0)branch can depoly to $(tput setaf 1)Production Environment$(tput sgr0)"
     exit 1
   fi
 else
